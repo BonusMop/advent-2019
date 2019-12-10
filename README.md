@@ -1,2 +1,2 @@
-# typescript-starter
-Quick way to get up and running with a typescript project
+# Advent of Code 2019
+My solutions for https://adventofcode.com/2019

@@ -1,7 +1,7 @@
 {
-  "name": "typescript-starter",
+  "name": "advent-2019",
   "version": "1.0.0",
-  "description": "A typescript project template.",
+  "description": "Solutions for the advent of code 2019.",
   "main": "./src/index.ts",
   "scripts": {
     "test": "jest",
