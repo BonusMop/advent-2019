@@ -1,0 +1,32 @@
+{
+  "name": "typescript-starter",
+  "version": "1.0.0",
+  "description": "A typescript project template.",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "jest",
+    "develop": "ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BonusMop/typescript-starter.git"
+  },
+  "keywords": [
+    "typescript",
+    "template",
+    "node"
+  ],
+  "author": "Brian Butler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BonusMop/typescript-starter/issues"
+  },
+  "homepage": "https://github.com/BonusMop/typescript-starter#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3"
+  }
+}
