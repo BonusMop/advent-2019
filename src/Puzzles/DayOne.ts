@@ -2,8 +2,11 @@ import { PuzzleInput } from "../Input/PuzzleInput";
 import { Puzzle } from "./Puzzle";
 
 export class DayOne implements Puzzle {
-    private _input: PuzzleInput;
-    public readonly name = "Day 1";
+    protected _input: PuzzleInput;
+
+    public get name(): string {
+        return "Day 1";
+    }
 
     constructor(input: PuzzleInput) {
         this._input = input;
