@@ -1,6 +1,7 @@
 import * as fs from 'fs';
+import { PuzzleInput } from './PuzzleInput';
 
-export class AdventInput {
+export class AdventInput implements PuzzleInput {
 
     private _dataFolder: string; 
 
