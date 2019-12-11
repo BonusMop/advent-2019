@@ -2,7 +2,7 @@ import { AdventInput } from "./Input/AdventInput";
 import { DayOne } from "./Puzzles/DayOne";
 import { Puzzle } from "./Puzzles/Puzzle";
 
-const run = async () => {
+const run = async (): Promise<void> => {
     const input = new AdventInput(__dirname + "/data");
     const puzzles: Puzzle[] = [
         new DayOne(input),

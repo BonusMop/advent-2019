@@ -19,8 +19,8 @@ export class AdventInput implements PuzzleInput {
     }
 
     async inputFor<T>(day: number): Promise<T[]> {
-        return new Promise<T[]>( async resolve => {
-            resolve ((await this.stringInputFor(day)).map(d => JSON.parse(d) as T));
+        return new Promise<T[]>( resolve => {
+            this.stringInputFor(day).then(value => resolve(value.map(d => JSON.parse(d) as T)));
         });
     }
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PuzzleInput } from "./PuzzleInput";
 
 export class MockInput implements PuzzleInput {

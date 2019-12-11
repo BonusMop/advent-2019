@@ -9,7 +9,7 @@ export class DayOne implements Puzzle {
         this._input = input;
     }
 
-    async solve() {
+    async solve(): Promise<string> {
         const data = await this._input.inputFor<number>(1);
         return data.map(d => this.fuelForModule(d)).reduce((p, c) => p + c).toString();
     }
