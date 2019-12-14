@@ -9,18 +9,18 @@ export class AdventInput implements PuzzleInput {
         this._dataFolder = dataFolder;
     }
 
-    async stringInputFor(day: number): Promise<string[]> {
+    async stringInputFor(day: number, delim = '\n'): Promise<string[]> {
         return new Promise<string[]>((resolve, reject) => {
             fs.readFile(`${this._dataFolder}/input.${day}.txt`, (err, data) => {
                 if (err) reject(err);
-                resolve(data.toString().split('\n'));
+                resolve(data.toString().split(delim));
             });
         });
     }
 
-    async inputFor<T>(day: number): Promise<T[]> {
+    async inputFor<T>(day: number, delim = '\n'): Promise<T[]> {
         return new Promise<T[]>( resolve => {
-            this.stringInputFor(day).then(value => resolve(value.map(d => JSON.parse(d) as T)));
+            this.stringInputFor(day, delim).then(value => resolve(value.map(d => JSON.parse(d) as T)));
         });
     }
 
