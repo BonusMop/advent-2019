@@ -2,7 +2,7 @@ import { DayOne } from "./DayOne";
 
 export class DayOneB extends DayOne {
     public get name(): string {
-        return "Day 1b";
+        return "Day 01b";
     }
 
     async solve(): Promise<string> {

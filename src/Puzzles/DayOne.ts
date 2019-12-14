@@ -5,7 +5,7 @@ export class DayOne implements Puzzle {
     protected _input: PuzzleInput;
 
     public get name(): string {
-        return "Day 1";
+        return "Day 01a";
     }
 
     constructor(input: PuzzleInput) {

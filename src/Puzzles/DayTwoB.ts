@@ -24,7 +24,6 @@ export class DayTwoB implements Puzzle {
             for (let j = 0;j<100; j++) {
                 computer.reset();
                 if (computer.execute(i,j) == goal) {
-                    console.log(`${i},${j}=${computer.program}`);
                     return (100*i+j).toString();
                 }
             }
