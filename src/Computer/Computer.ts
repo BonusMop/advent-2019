@@ -15,11 +15,13 @@ export class Computer {
         this._instance = this._code.slice();
     }
 
-    execute(): number {
+    execute(inputA?: number, inputB?: number): number {
         const code = this._instance;
         if (!code || code.length <= 0) {
             throw new Error('program is not set');
         }
+        if (inputA && code.length >= 2) code[1] = inputA;
+        if (inputB && code.length >= 3) code[2] = inputB;
 
         let done = false;
         let ip = 0;
