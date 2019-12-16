@@ -1,9 +1,14 @@
 export class Computer {
     private _code: number[] = [];
     private _instance: number[] = [];
+    private _outputs: number[] = [];
 
     get program(): number[] {
         return this._instance;
+    }
+
+    get outputs(): number[] {
+        return this._outputs;
     }
 
     loadProgram(intcode: number[]): void {
@@ -15,35 +20,63 @@ export class Computer {
         this._instance = this._code.slice();
     }
 
-    execute(inputA?: number, inputB?: number): number {
+    getModes(value: number): number[] {
+        const result = [];
+        value = Math.floor(value / 100);
+        while(value > 0) {
+            result.push(value % 10);
+            value = Math.floor(value / 10);
+        }
+        return result;
+    }
+
+    getValue(mode: number, opcode: number, data: number[]): number {
+        return mode ? opcode : data[opcode]; 
+    }
+
+    execute(inputs?: number[]): number {
         const code = this._instance;
         if (!code || code.length <= 0) {
             throw new Error('program is not set');
         }
-        if (inputA && code.length >= 2) code[1] = inputA;
-        if (inputB && code.length >= 3) code[2] = inputB;
+
+        const input = inputs || [];
 
         let done = false;
         let ip = 0;
         while (!done) {
-            const instruction = code[ip];
+            const instruction = code[ip] % 100;
+            const modes = this.getModes(code[ip]);
             switch(instruction) {
                 case 1: { // add
-                    const op1 = code[ip+1];
-                    const op2 = code[ip+2];
+                    const val1 = this.getValue(modes[0] || 0, code[ip+1], code);
+                    const val2 = this.getValue(modes[1] || 0, code[ip+2], code);
                     const out = code[ip+3];
-                    const result = code[op1] + code[op2];
+                    const result = val1 + val2;
                     code[out] = result;
                     ip+=4;
                     break;
                 }
                 case 2: { // mult
-                    const op1 = code[ip+1];
-                    const op2 = code[ip+2];
+                    const val1 = this.getValue(modes[0] || 0, code[ip+1], code);
+                    const val2 = this.getValue(modes[1] || 0, code[ip+2], code);
                     const out = code[ip+3];
-                    const result = code[op1] * code[op2];
+                    const result = val1 * val2;
                     code[out] = result;
                     ip+=4;
+                    break;
+                }
+                case 3: { // input
+                    const result = input.splice(0,1)[0];
+                    const out = code[ip+1];
+                    code[out] = result;
+                    ip+=2;
+                    break;
+                }
+                case 4: { // output
+                    const val1 = this.getValue(modes[0] || 0, code[ip+1], code);
+                    this._outputs.push(val1);
+                    ip+=2;
                     break;
                 }
                 case 99: { // terminate
