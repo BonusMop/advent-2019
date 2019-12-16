@@ -9,6 +9,7 @@ import { DayThreeB } from "./Puzzles/DayThreeB";
 import { DayFour } from "./Puzzles/DayFour";
 import { DayFourB } from "./Puzzles/DayFourB";
 import { DayFive } from "./Puzzles/DayFive";
+import { DayFiveB } from "./Puzzles/DayFiveB";
 
 /*
 Day 01a: 3363929
@@ -34,6 +35,7 @@ const run = async (): Promise<void> => {
         new DayFour(),
         new DayFourB(),
         new DayFive(input),
+        new DayFiveB(input),
     ];
 
     const solutionPromises = puzzles.map(p => { return { name: p.name, solver: p.solve() }})
