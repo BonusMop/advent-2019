@@ -18,6 +18,7 @@ export class Computer {
 
     reset(): void {
         this._instance = this._code.slice();
+        this._outputs = [];
     }
 
     getModes(value: number): number[] {
@@ -77,6 +78,40 @@ export class Computer {
                     const val1 = this.getValue(modes[0] || 0, code[ip+1], code);
                     this._outputs.push(val1);
                     ip+=2;
+                    break;
+                }
+                case 5: { // jump-if-true
+                    const val1 = this.getValue(modes[0] || 0, code[ip+1], code);
+                    const val2 = this.getValue(modes[1] || 0, code[ip+2], code);
+                    ip = val1 === 0 ? ip + 3 : val2;
+                    break;
+                }
+                case 6: { // jump-if-false
+                    const val1 = this.getValue(modes[0] || 0, code[ip+1], code);
+                    const val2 = this.getValue(modes[1] || 0, code[ip+2], code);
+                    ip = val1 !== 0 ? ip + 3 : val2;
+                    break;
+                }
+                case 7: { // less than
+                    const val1 = this.getValue(modes[0] || 0, code[ip+1], code);
+                    const val2 = this.getValue(modes[1] || 0, code[ip+2], code);
+                    const out = code[ip+3];
+                    code[out] = 0;
+                    if (val1 < val2) {
+                        code[out] = 1;
+                    }
+                    ip+=4;
+                    break;
+                }
+                case 8: { // equals
+                    const val1 = this.getValue(modes[0] || 0, code[ip+1], code);
+                    const val2 = this.getValue(modes[1] || 0, code[ip+2], code);
+                    const out = code[ip+3];
+                    code[out] = 0;
+                    if (val1 === val2) {
+                        code[out] = 1;
+                    }
+                    ip+=4;
                     break;
                 }
                 case 99: { // terminate
